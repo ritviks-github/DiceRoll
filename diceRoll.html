@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiceRoll</title>
+    <style>
+        body{
+            background:linear-gradient(45deg,blue,rgb(139, 49, 49) 50%,orange);
+        }
+        *{
+            margin:0px;
+            padding:0px;
+            box-sizing:border-box;
+        }
+        .submain1,.submain2{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height:50vh;
+            background:linear-gradient(rgb(63, 209, 225),rgba(192, 178, 178, 0.829),rgb(198, 136, 22))
+        }
+        .submain1{
+            border-right-style: solid;
+        }
+        .player1{
+            font-size:64px;
+            font-weight:900;
+        }
+        .player2{
+            font-size:64px;
+            font-weight:900;
+        }
+        .main{
+            display: flex;
+            flex-direction: row;
+            height:100vh;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .newgame{
+            display:flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-left:41%;
+            position:fixed;
+            font-size:16px;
+            font-weight: 900;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            top:10%;
+            height:4em;
+            width:15em;
+        }
+        .newgame:hover{
+            cursor:pointer;
+        }
+        .reload{
+            height:2em;
+        }
+        .roll{
+            position:fixed;
+            bottom:10%;
+            display:flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-left:41%;
+            font-size:16px;
+            background-color:white;
+            height:4em;
+            width:15em;
+            font-weight: 900;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .roll:hover{
+            cursor: pointer;
+        }
+        .rolls{
+            height:2em;
+        }
+        img{
+            height:5em;
+        }
+        .currentscorep1,.currentscorep2{
+            padding-left:45%;
+        }
+        .diceset{
+            display:flex;
+            flex-direction:column;
+            justify-content: space-evenly;
+            position:fixed;
+            top:15%;
+            left:20%;
+        }
+    </style>
+</head>
+<body>
+    <button class="newgame">
+        <img class="reload" src="https://m.media-amazon.com/images/I/41R2Kt9o2XL.png">New Game
+    </button>
+    <div class="main">
+        <div class="submain1">
+            <span class="player1">Player 1</span>
+            <div class="score" style="font-size:48px;padding-left:44%;">0</div>
+            <div class="currents">
+                <span class="current" style="padding-left:20%;font-size:40px">Current</span>
+                <div class="currentscorep1"></div>
+            </div>
+        </div>
+        <div class="submain2">
+            <span class="player2">Player 2</span>
+            <div class="score" style="padding-left:44%;font-size:48px;">0</div>
+            <div class="currents">
+                <span class="current" style="padding-left:20%;font-size:40px">Current</span>
+                <div class="currentscorep2"></div>
+            </div>
+        </div>
+    </div>
+    <button class="roll">
+        <img class= "rolls" src="https://media.istockphoto.com/id/1212735107/vector/pair-of-dice-to-stake-or-gambling-with-craps-line-art-vector-icon-for-casino-apps-and.jpg?s=612x612&w=0&k=20&c=H6rIVQtXeugP3jE7j8PcmXFo6vgfqTQVKX_h0znjUow=">Roll Dice
+    </button>
+    <div class="diceset">
+        <img id="d1" src="./dice_images/dice1.png">
+        <img id="d2"src="./dice_images/dice2.png">
+        <img id="d3" src="./dice_images/dice3.png">
+        <img id="d4" src="./dice_images/dice4.png">
+        <img id="d5" src="./dice_images/dice5.png">
+        <img id="d6" src="./dice_images/6dice.png">
+    </div>
+    <script>
+        const rollDice = document.querySelector('.roll');
+        let flag = true;
+        let sum = Number(0);
+        let summ = Number(0);
+        function reset(){
+            document.querySelector('.submain1').style.filter = "blur(0px)";
+            sum = 0;
+            summ = 0;
+            document.querySelector('.submain2').style.filter = "blur(0px)";
+            document.querySelector('.currentscorep1').textContent = 0;
+            document.querySelector('.currentscorep2').textContent = 0;
+            document.querySelector('#d6').style.border = "none";
+            document.querySelector('#d2').style.border = "none";
+            document.querySelector('#d3').style.border = "none";
+            document.querySelector('#d4').style.border = "none";
+            document.querySelector('#d5').style.border = "none";
+            document.querySelector('#d1').style.border = "none";
+        }
+        rollDice.addEventListener('click',function(){
+            let v = Math.floor(Math.random()*6) + 1;
+            switch(v){
+                case 1: document.querySelector('#d1').style.border = "solid";
+                        document.querySelector('#d1').style.transition = "1s";
+                        document.querySelector('#d2').style.border = "none";
+                        document.querySelector('#d3').style.border = "none";
+                        document.querySelector('#d4').style.border = "none";
+                        document.querySelector('#d5').style.border = "none";
+                        document.querySelector('#d6').style.border = "none";
+                        break;
+                case 2: document.querySelector('#d2').style.border = "solid";
+                        document.querySelector('#d2').style.transition = "1s";
+                        document.querySelector('#d1').style.border = "none";
+                        document.querySelector('#d3').style.border = "none";
+                        document.querySelector('#d4').style.border = "none";
+                        document.querySelector('#d5').style.border = "none";
+                        document.querySelector('#d6').style.border = "none";
+                        break;
+                case 3: document.querySelector('#d3').style.border = "solid";
+                        document.querySelector('#d3').style.transition = "1s";
+                        document.querySelector('#d2').style.border = "none";
+                        document.querySelector('#d1').style.border = "none";
+                        document.querySelector('#d4').style.border = "none";
+                        document.querySelector('#d5').style.border = "none";
+                        document.querySelector('#d6').style.border = "none";
+                        break;
+                case 4: document.querySelector('#d4').style.border = "solid";
+                        document.querySelector('#d4').style.transition = "1s";
+                        document.querySelector('#d2').style.border = "none";
+                        document.querySelector('#d3').style.border = "none";
+                        document.querySelector('#d1').style.border = "none";
+                        document.querySelector('#d5').style.border = "none";
+                        document.querySelector('#d6').style.border = "none";
+                        break;
+                case 5: document.querySelector('#d5').style.border = "solid";
+                        document.querySelector('#d5').style.transition = "1s";
+                        document.querySelector('#d2').style.border = "none";
+                        document.querySelector('#d3').style.border = "none";
+                        document.querySelector('#d4').style.border = "none";
+                        document.querySelector('#d1').style.border = "none";
+                        document.querySelector('#d6').style.border = "none";
+                        break;
+                case 6: document.querySelector('#d6').style.border = "solid";
+                        document.querySelector('#d6').style.transition = "1s";
+                        document.querySelector('#d2').style.border = "none";
+                        document.querySelector('#d3').style.border = "none";
+                        document.querySelector('#d4').style.border = "none";
+                        document.querySelector('#d5').style.border = "none";
+                        document.querySelector('#d1').style.border = "none";
+                        break;
+            }
+            if(flag){
+                document.querySelector('.submain1').style.filter = "blur(0px)";
+                sum += Number(v);
+                document.querySelector('.currentscorep1').textContent = sum;
+                document.querySelector('.submain2').style.filter ="blur(3px)";
+                flag = !flag;
+            }
+            else{
+                summ += Number(v);
+                document.querySelector('.submain2').style.filter = "blur(0px)";
+                document.querySelector('.currentscorep2').textContent = summ;
+                document.querySelector('.submain1').style.filter = "blur(3px)";
+                flag = !flag;
+            }
+            if(sum >= 20 && summ < 20){
+                alert('Player 1 Won!');
+                alert('The score of player 1 is :'+sum);
+                alert('Click OK to play again::');
+                reset();
+            }
+            else if(sum < 20 && summ >= 20){
+                alert('Player 2 Won !');
+                alert('The score of player 2 is :'+summ);
+                alert('Click OK to play again ::')
+                reset();
+            }
+        });
+        
+        const btnReset = document.querySelector('.newgame');
+        btnReset.addEventListener('click',function(){
+            sum = 0;
+            summ = 0;
+            document.querySelector('.submain1').style.filter = "blur(0px)";
+            document.querySelector('.submain2').style.filter = "blur(0px)";
+            document.querySelector('.currentscorep1').textContent = 0;
+            document.querySelector('.currentscorep2').textContent = 0;
+            document.querySelector('#d6').style.border = "none";
+            document.querySelector('#d2').style.border = "none";
+            document.querySelector('#d3').style.border = "none";
+            document.querySelector('#d4').style.border = "none";
+            document.querySelector('#d5').style.border = "none";
+            document.querySelector('#d1').style.border = "none";
+        });
+    </script>
+</body>
+</html>
